@@ -4,6 +4,7 @@ $inName = "";
 $inSocial = "";
 $RadioGroup1 = "";
 $spamBot = "";
+$message = "";
 
 $validForm = false; //Set valid form to false
 
@@ -39,8 +40,18 @@ if(isset($_POST['submit'])) //check if form has been submitted
 		}
 		
 }
-if($validForm){
+ if($validForm){
+	 include 'registration.php';
 	
+	
+}
+if(empty($inSocial)){
+	echo "No data";
+		echo $inSocial;
+}
+
+else{
+	echo $message;
 }
 
 ?>
@@ -63,6 +74,7 @@ if($validForm){
 #orderArea	{
 	width:600px;
 	background-color:#CF9;
+	
 }
 
 .error	{
@@ -71,21 +83,33 @@ if($validForm){
 }
 	.hide{
 		display: none;
-	}	
+	}
+	#button1{
+		background-color: #411A1A;
+			color:whitesmoke;
+			font-size: 16px;
+	}
+	
+	
 </style>
 </head>
 
 <body>
+	<p>
+			<a href= "homework.htm"><button id="button1" name="button1">Homework page</button></a>
+		
+		</p>
 <h1>WDV341 Intro PHP</h1>
 <h2>Form Validation Assignment
 
 
 <?php
-		if($validForm)
+		if($validForm )
 		{	
 	?>
 	<h3>Thank you!</h3>
-	<p>Your registration has been received</p>
+	<h4>Your registration has been received</h4>
+	
 	<?php
 		}
 	else
@@ -110,22 +134,22 @@ if($validForm){
     </tr>
 	  <tr class="hide">
 		  <td>Leave blank</td>
-	  	<td><input type="text" name="spamBot" id="spamBot" autocomplete="off" </td>
+	  	<td><input type="text" name="spamBot" id="spamBot" autocomplete="off"/> </td>
 	  </tr>
 	  
     <tr>
       <td>Choose a Response</td>
       <td><p>
         <label>
-          <input type="radio" name="RadioGroup1" id="RadioGroup1_0" <?php if($RadioGroup1 == 'RadioGroup1_0'){echo 'checked';}  ?>>
+          <input type="radio" name="RadioGroup1" id="RadioGroup1_0" value="Phone" <?php if($RadioGroup1 == 'RadioGroup1_0'){echo 'checked';}  ?>>
           Phone</label>
         <br>
         <label>
-          <input type="radio" name="RadioGroup1" id="RadioGroup1_1" <?php if($RadioGroup1 == 'RadioGroup1_1'){echo 'checked';}  ?>>
+          <input type="radio" name="RadioGroup1" id="RadioGroup1_1" value="Email" <?php if($RadioGroup1 == 'RadioGroup1_1'){echo 'checked';}  ?>>
           Email</label>
         <br>
         <label>
-          <input type="radio" name="RadioGroup1" id="RadioGroup1_2" <?php if($RadioGroup1 == 'RadioGroup1_2'){echo 'checked';}  ?>>
+          <input type="radio" name="RadioGroup1" id="RadioGroup1_2" value="US Mail" <?php if($RadioGroup1 == 'RadioGroup1_2'){echo 'checked';}  ?>>
           US Mail</label>
         <br>
       </p></td>
@@ -141,6 +165,48 @@ if($validForm){
 <?php
 	}
 	?>
-
+<?php
+		if($stmt->execute())
+		{
+			
+	?>
+	 
+	<p>See your information below.</p>
+	<div id="orderArea">
+  <form id="form1" name="form1" method="post" action="registration.php">
+  <h3>Customer Registration Form</h3>
+	  
+  <table width="587" border="0">
+    <tr>
+      <td>Name:</td>
+      <td><input type="text" name="inName" id="inName" size="40" value="<?php echo $inName; ?>"/></td>
+      
+    </tr>
+    <tr>
+      <td>Social Security:</td>
+      <td><input type="text" name="inSocial" id="inSocial" size="40" value="<?php echo $inSocial; ?>" /></td>
+    
+    </tr>
+	  
+	  
+    <tr>
+      <td>Choose a Response:</td>
+      <td>
+     	  <input type="text" name="RadioGroup1" id="RadioGroup1" value="<?php echo $RadioGroup1; ?>"/></label></p></td>
+        
+    </tr>
+  </table>
+		</form>
+</div>
+	<?php
+		}
+	else
+	{
+?>
+	<?php
+		echo $message;
+	}
+	?>
+&nbsp;
 </body>
 </html>
