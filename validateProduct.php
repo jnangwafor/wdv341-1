@@ -14,11 +14,8 @@ function validateName(){
 		
 		$nameErrMsg = "Name name cannot be spaces"; //Name error message
 	}
-	else{
-		if(!$prod_name ==$cleanName){
-			$nameErrMsg = "Must not contain special characters";
-		}
-	}
+	
+	$prod_name = $cleanName;
 }
 //Validate product category function.
 
@@ -36,11 +33,8 @@ function validateCategory(){
 		
 		$categoryErrMsg = "Must enter product category. e.g. automobile, electronics, etc."; // Set error message
 	}
-	else{
-		if(!$prod_category==$cleanCategory){
-			$categoryErrMsg = "Must not contian special characters";
-		}
-	}
+	
+	$prod_category = $cleanCategory;
 }//End validateCategory
 
 function validateQuantity()
@@ -69,26 +63,12 @@ function validateType(){
 		
 		$typeErrMsg = "Must enter product type, e.g. sedan, phone. etc."; // Set error message
 	}
-	else{
-		if(!$prod_type==$cleanType){
-			$typeErrMsg = "Must not contain special characters";
-		}
-	}
+	$prod_type = $cleanType;
 }
-//Validate product cost
-function validateCost()
-{
-	global $prod_cost, $validForm, $costErrMsg;			//Use the GLOBAL Version of these variables instead of making them local
-	$costErrMsg = "";										//Clear the error message. 
 
-	if (!preg_match("/^[1-9][0-9]*$/",$prod_cost))			//Uses a Regular Expression to validate an integer 
-  	{
-		$validForm = false;
-  		$costErrMsg = "Invalid Cost"; 
-  	}
 	
 	
-}//end validateCost
+
 
 //Validate product price
 function validatePrice()
@@ -116,6 +96,7 @@ function validatePrice()
 		
 		$descErrMsg = "Discribe your product"; //Name error message
 	}
+	
 	}
 
 ?>

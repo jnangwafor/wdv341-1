@@ -47,13 +47,18 @@ if($validForm){
 			echo "Email not sent";
 		}
 		*/
-	$mailTo = "contact@wdv341.spysportworld.com";
+	$mailTo = "admin@p.spysportworld.com";
 	$mailFrom = $user_email;
 	$headers = "Frpom: ".$mailFrom;
 	$messageBody = "This message is from: ".$user_name."\n\n".$message_details;
 	
-	mail($mailTo,$message_title,$message_details,$headers);
-	header("location: index.php");
+	if(mail($mailTo,$message_title,$message_details,$headers))
+	{
+	echo "<h3 style'text-align: center; color: green;'>Email sent sucessfully!</h3>";
+	}else{
+	echo "<h3 style'text-align: center; color: green;'>Email not sent</h3>";
+	}
+	//header("location: index.php");
 				
 }//close if validform
 if($validForm){

@@ -8,7 +8,6 @@ $prod_name ="";
 $prod_category ="";
 $prod_type ="";
 $prod_quantity ="";
-$prod_cost ="";
 $prod_price ="";
 $prod_description ="";
 $prod_date ="";
@@ -49,6 +48,9 @@ try{
 		  error_log($e->getMessage());			//Delivers a developer defined error message to the PHP log file at c:\xampp/php\logs\php_error_log
 		  error_log($e->getLine());
 		  error_log(var_dump(debug_backtrace()));
+	 $errorLogMsg = "Trouble accessing records from the database.";
+	
+	 error_log($errorLogMsg."\n\n".$e, 1, "jacksonangwafor@gmail.com","from: admin@p.spysportworld.com");
 	  
 		  //Clean up any variables or connections that have been left hanging by this error.		
 	  
@@ -85,7 +87,6 @@ try{
 				<th>Category</th>
 				<th>Type</th>
 				<th>Quantity</th>
-				<th>Cost</th>
 				<th>Price</th>
 				<th >Description</th>
 				<th colspan="2">Action</th>
@@ -98,7 +99,6 @@ try{
 			echo "<td>" . $results['prod_category'] . "</td>";	
 			echo "<td>" . $results['prod_type'] . "</td>";
 			echo "<td>" . $results['prod_quantity'] . "</td>";
-			echo "<td>" . $results['prod_cost'] . "</td>";
 			echo "<td>" . $results['prod_price'] . "</td>";
 			echo "<td>" . $results['prod_description'] . "</td>";
 			echo "<td><a href='updateProducts.php?edit=".$results['prod_id'] . "'>Edit</a></td>"; 

@@ -6,15 +6,15 @@ $prod_name ="";
 $prod_category ="";
 $prod_type ="";
 $prod_quantity ="";
-$prod_cost ="";
+
 $prod_price ="";
 $prod_description ="";
 $prod_date ="";
 $prod_image="";
 
 //Fetch records to update
-      if(isset($_GET['edit'])){
-	     $prod_id  = $_GET['edit'];
+      if(isset($_GET['detail'])){
+	     $prod_id  = $_GET['detail'];
 	
 	    // $edit_state = true; //change edit state to true
 		
@@ -73,61 +73,47 @@ $prod_image="";
 <meta charset="utf-8">
 <title>Untitled Document</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1", user-scalable="no">
-	<style>
-		body{
-			background-color: #CAD3D1;
-		}
-		.container-div{
-			width: 80%;
-			
-			margin: auto;
-			padding: 10px;
-		}
-		.center-div{
-		
-			
-		}
-		.image-div{
-			margin-top: 80px;
-			float: left;
-			width: 25%;
-			overflow: hidden;
-			height: 200px;
-			
-		}
-		.detail-div{
-			margin-top: 80px;
-			float: left;
-			width: 55%;
-			overflow: hidden;
-			height: 200px;
-			background-color: #BDE2F2;
-		
-		}
-		@media screen and (max-wdth: 600px){
-			.detail-div, .image-div {
-				width: 100%;
-			}
-		}
-	</style>
+	<link href="CSS/productDetails.css" rel="stylesheet" type="text/css"/>
+	 
+	<script src="Javascript/productDisplay.js"></script>
 </head>
 
-<body>
-	<div class="container-div">
-		<div class="center-div">
+<body >
+	<?php include "portfolioHeader.php"; ?>
+	
+	<a href= "products.php"><button id="button1" name="button1">Back to Products</button></a>
+	
+	<div class="container-div" >
 		<div class="image-div">
-		   <?php echo "<img src='uploadImages/. $prod_image;'/>" ?>
+		   <img src="uploadImages/<?php echo $prod_image; ?>" width="200" height="250"/>
 		</div>
 		<div class="detail-div">
-			<span>Product Name: <?php echo $prod_name; ?></span><br>
-			<span>Selling Now at: <?php echo $prod_price; ?></span><br>
-			<span>Category: <?php echo $prod_category; ?></span><br>
-			<span>Product Type: <?php echo $prod_type; ?></span><br>
-			<span>Description: <?php echo $prod_description; ?></span><br>
-			<span>Date posted: <?php echo $prod_date; ?></span>
+			<p>Product Name: </p>
+			
+			<p>Selling Now at: </p>
+			<p>Category: </p>
+			
+			<p>Product Type: </p>
+			<p>Date posted: </p>
+			<p>Description: </p>
+			
 		</div>
+			<div class="in-div" id="inDisplay">
+			<p> <?php echo $prod_name; ?></p>
+			<p id="inPrice"> <?php  echo "<script>document.write(formatCurrency($prod_price)); </script>" ?></p>
+			<p> <?php echo $prod_category; ?></p>
+			
+			<p><?php echo $prod_type; ?></p>
+			
+			<p id="inDate" ><?php echo $prod_date; ?> </p>
+			<p><?php echo $prod_description."\n..\n"; ?></p>
+
+			</div>
 		</div>
 		
-	</div>
+		
+		
+	
+	<?php include "footer.php"; ?>
 </body>
 </html>

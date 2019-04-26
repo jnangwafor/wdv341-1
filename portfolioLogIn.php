@@ -59,60 +59,6 @@ else
 <title>Log In</title>
 	<link href="CSS/portfolioIndex.css" rel="stylesheet" type="text/css"/>
 	
-	<style>
-		*{box-sizing: border-box;}
-		.form-control{
-			width: 400px;
-			background-color: #CEDCDE;
-			border-radius: 5px;
-			margin: 40px auto;
-		   padding:20px;
-			text-align: center;
-			 resize: vertical;
-			
-		}
-		#password, #username{
-			border-radius: 3px;
-			 resize: vertical;
-		}.loginBtn:hover{
-			background-color: cadetblue;
-			color: white;
-			
-		}
-		input{
-			height: 30px;
-		}
-		.loginBtn{
-		font-size: 18px;
-		padding: 5px;
-			width: 74%;
-			background: #243C3E;
-			color: #ECE1E1;
-		}
-		#errorLog{
-			color: brown;
-		}
-		
-		h2{
-			text-align: center;
-			color: #564E56;
-			text-shadow: 2px 2px 6px white;
-			font-size: 30px;
-		}
-		body{
-			font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";
-		}
-		@media screen and (max-width: 600px){
-			.form-control{
-				width: 100%;
-				marging: 40px auto;
-				padding: 10px;
-				 resize: vertical;
-			}
-		
-		}
-	
-	</style>
 	<script>
 		function textFocus(){
 			var textArea = document.getElementById("username");
@@ -142,13 +88,14 @@ else
 				
 			
 				<p>
-				<input type="submit" class="loginBtn"  id="submit" value="LOGIN">
+				<input type="submit" class="loginBtn" id="submit" value="LOGIN">
 			</p>
 				</form>
 			</div>
 		
 
 	</div>
+	
 	
 	<?php include "footer.php"; ?>
 </body>

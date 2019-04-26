@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 //Create and initialize variables
 $prod_id =0;
 
@@ -7,17 +7,15 @@ $prod_name ="";
 $prod_category ="";
 $prod_type ="";
 $prod_quantity ="";
-$prod_cost ="";
 $prod_price ="";
 $prod_description ="";
 $prod_date ="";
 
-
+$message ="";
 $nameErrMsg = "";
 $categoryErrMsg = "";
 $typeErrMsg = "";
 $quanErrMsg = "";
-$costErrMsg = "";
 $priceErrMsg = "";
 $descErrMsg = "";
 $validForm = false;
@@ -29,7 +27,6 @@ $validForm = false;
 		$prod_category =$_POST['prod_category'];
 		$prod_type =$_POST['prod_type'];
 		$prod_quantity =$_POST['prod_quantity'];
-		$prod_cost =$_POST['prod_cost'];
 		$prod_price =$_POST['prod_price'];
 		$prod_id =$_POST['prod_id'];
 		$prod_description = $_POST['prod_description'];
@@ -41,11 +38,12 @@ $validForm = false;
 		validateCategory();// call validate category input
 		validateType();// call validate type input
 		validateQuantity();//call validate quantity input
-		validateCost();// call validate cost input
 		validatePrice();//call validate price input
 		validateDescription();//call validate price input
 		
 		if($validForm){
+			
+		
 			try{
 		require "connectPDO.php";
 		
@@ -55,8 +53,6 @@ $validForm = false;
 		prod_category = :prodCategory,
 		prod_type = :prodType,
 		prod_quantity = :prodQuantity,
-		
-		prod_cost = :prodCost,
 		prod_price = :prodPrice,
 		prod_description = :prodDescription
 		WHERE prod_id = :prodId";
@@ -71,7 +67,6 @@ $validForm = false;
 				
 				$statement->bindParam(':prodType', $prod_type, PDO::PARAM_STR);
 				$statement->bindParam(':prodQuantity', $prod_quantity, PDO::PARAM_INT);
-				$statement->bindParam(':prodCost', $prod_cost, PDO::PARAM_INT);
 				$statement->bindParam(':prodPrice', $prod_price, PDO::PARAM_INT);
 				$statement->bindParam(':prodDescription', $prod_description, PDO::PARAM_STR);
 				$statement->bindParam(':prodId', $prod_id, PDO::PARAM_INT);
@@ -99,7 +94,8 @@ $validForm = false;
 			$_SESSION['message'] = "Record Updated";
 			header("location: updateProducts.php");
 		}
-	}//end update
+			
+		}//end update
 	}//end if validform	
 			
 else{
@@ -132,7 +128,6 @@ else{
 				$prod_category =$record['prod_category'];
 				$prod_type =$record['prod_type'];
 				$prod_quantity =$record['prod_quantity'];
-				$prod_cost =$record['prod_cost'];
 				$prod_price =$record['prod_price'];
 				$prod_description =$record['prod_description'];
 				$prod_date =$record['available_date'];
@@ -204,7 +199,14 @@ try{
 	<?php
 		include "portfolioHeader.php";
 		include "sideNav.php";
-		include "welcome.php"; 
+		//check if user login successfully and display a welcome message
+	if(isset($_SESSION['username'])){
+		echo "<h3>Welcome ".$_SESSION['username']."</h3>";
+		echo "<a style='float: right; text-decoration: none; padding: 5px;' href='portfolioLogout.php'><button style='font-size: 20px; background-color: green; color: white;'>Logout</button></a>";
+	}
+else{
+	header("location: portfolioLogIn.php");
+}
 	?>
 	<h1>Products Table</h1>
 	<h2> Update Products Table</h2>
@@ -223,7 +225,6 @@ try{
 				<th>Category</th>
 				<th>Type</th>
 				<th>Quantity</th>
-				<th>Cost</th>
 				<th>Price</th>
 				<th >Description</th>
 				<th colspan="2">Action</th>
@@ -236,7 +237,6 @@ try{
 			echo "<td>" . $results['prod_category'] . "</td>";	
 			echo "<td>" . $results['prod_type'] . "</td>";
 			echo "<td>" . $results['prod_quantity'] . "</td>";
-			echo "<td>" . $results['prod_cost'] . "</td>";
 			echo "<td>" . $results['prod_price'] . "</td>";
 			echo "<td>" . $results['prod_description'] . "</td>";
 			echo "<td><a href='updateProducts.php?edit=".$results['prod_id'] . "'>Edit</a></td>"; 
@@ -278,11 +278,7 @@ try{
 			<input type="text" name="prod_quantity"  value="<?php echo $prod_quantity; ?>">
 				<span class="errorMsg"><?php echo $quanErrMsg?></span>
 		</div>
-				<div class="input-group">
-			<lable>Cost</lable><br>
-			<input type="text" name="prod_cost"  value="<?php echo $prod_cost; ?>">
-					<span class="errorMsg"><?php echo $costErrMsg?></span>
-		</div>
+				
 			<div class="input-group">
 			<lable>Price</lable><br>
 			<input type="text" name="prod_price"  value="<?php echo $prod_price; ?>">
@@ -294,9 +290,7 @@ try{
 			<textarea name="prod_description" maxlength ="700"  value="<?php echo $prod_description; ?>"></textarea>
 		<span class="errorMsg"><?php echo $descErrMsg?></span>
 		</div>
-		<div class="input-group">
-			
-			
+		
 			<button type="submit" name="update" class="btn">Update</button>
 			
 			

@@ -2,18 +2,7 @@
 //session_start();
 include "connectPDO.php";
 
-//Create and initialize variables
-$prod_id =0;
 
-$prod_name ="";
-$prod_category ="";
-$prod_type ="";
-$prod_quantity ="";
-$prod_cost ="";
-$prod_price ="";
-$prod_description ="";
-$prod_date ="";
-$validForm = false;
 
 
 
